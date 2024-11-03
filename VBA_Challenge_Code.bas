@@ -78,8 +78,11 @@ Sub Test_Ticker(ByRef ws As Worksheet)
             ws.Cells(summary_table_row, 10).Value = qc
 
             ' Calculate quarterly percent change
-            qpc = ((close_value - open_value) / open_value) * 100
+            qpc = ((close_value - open_value) / open_value)
             ws.Cells(summary_table_row, 11).Value = qpc
+            
+            ' Format cells in the percent change column as percentage with two decimal places
+            ws.Range("K2:K" & summary_table_row - 1).NumberFormat = "0.00%"
 
             ' Move to the next summary row
             summary_table_row = summary_table_row + 1
@@ -89,7 +92,7 @@ Sub Test_Ticker(ByRef ws As Worksheet)
         End If
     Next i
 
-    ' FIND GREATEST VALUES
+    ' FIND GREATEST VALUES ChatGPT used for coding
     Dim maxvalue As Double
     Dim lastRow As Long
     Dim maxrow As Long
